@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { Pagination, Typography } from "antd";
+import { Pagination, Space, Typography } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload } from "antd";
 import PageTemplate from "../components/PageTemplate/PageTemplate";
@@ -33,39 +33,58 @@ const PDFViewerPage: FC = () => {
 		<PageTemplate>
 			<Typography.Title>PDF Viewer</Typography.Title>
 
-			<Upload
-				accept="application/pdf"
-				showUploadList={false}
-				onChange={({ file }) => {
-					file.originFileObj &&
-						setPdfFileUrl(URL.createObjectURL(file.originFileObj));
+			<Space
+				align="center"
+				direction="vertical"
+				size="large"
+				style={{
+					width: "100%",
+					marginTop: "30px",
+					marginBottom: "30px",
 				}}
 			>
-				<Button icon={<UploadOutlined />}>Upload PDF</Button>
-			</Upload>
-
-			{pdfFileUrl ? (
-				<>
-					{paginationComponent}
-
-					<Document
-						file={pdfFileUrl}
-						loading={<Loader />}
-						onLoadSuccess={({ numPages: pages }) => {
-							setNumPages(pages);
-						}}
-						options={{
-							cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
-							cMapPacked: true,
-							standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
-						}}
+				<Upload
+					accept="application/pdf"
+					showUploadList={false}
+					onChange={({ file }) => {
+						file.originFileObj &&
+							setPdfFileUrl(
+								URL.createObjectURL(file.originFileObj)
+							);
+					}}
+				>
+					<Button
+						icon={<UploadOutlined />}
+						type="primary"
+						style={{ marginBottom: "30px" }}
 					>
-						<Page pageNumber={pageNumber} />
-					</Document>
+						Upload PDF
+					</Button>
+				</Upload>
 
-					{paginationComponent}
-				</>
-			) : null}
+				{pdfFileUrl ? (
+					<>
+						{paginationComponent}
+
+						<Document
+							file={pdfFileUrl}
+							loading={<Loader />}
+							onLoadSuccess={({ numPages: pages }) => {
+								setNumPages(pages);
+							}}
+							options={{
+								cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
+								cMapPacked: true,
+								standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts`,
+							}}
+						>
+							<Page pageNumber={pageNumber} />
+						</Document>
+
+						{paginationComponent}
+					</>
+				) : null}
+			</Space>
 		</PageTemplate>
 	);
 };

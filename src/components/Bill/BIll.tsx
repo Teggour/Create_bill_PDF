@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Typography, Space, Radio } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { PDFViewer, usePDF } from "@react-pdf/renderer";
@@ -8,15 +8,18 @@ import Error from "../Error/Error";
 import { IPropsWithBill } from "../../interfaces/pdfTemplateProps";
 
 const Bill: React.FC<IPropsWithBill> = ({ bill }) => {
-	const [height, setHeight] = useState<number>(720);
+	// const [height, setHeight] = useState<number>(720);
 	const [showPreview, setShowPreview] = useState<boolean>(true);
 
-	// const height = 720;
+	const height = 720;
 
 	const fileName = "Bill.pdf";
 	const pdfDoc = <PdfTemplate billData={bill} />;
 
-	const [pdfFile, updatePdfFile] = usePDF({
+	const [
+		pdfFile,
+		// updatePdfFile
+	] = usePDF({
 		document: pdfDoc,
 	});
 
@@ -31,19 +34,19 @@ const Bill: React.FC<IPropsWithBill> = ({ bill }) => {
 		setShowPreview(value);
 	};
 
-	const sizeOptions = [
-		{ label: "Standart", value: 720 },
-		{ label: "Large", value: 1000 },
-	];
+	// const sizeOptions = [
+	// 	{ label: "Standart", value: 720 },
+	// 	{ label: "Large", value: 1000 },
+	// ];
 
-	const onChangeSize = ({ target: { value } }: RadioChangeEvent) => {
-		setHeight(value);
-	};
+	// const onChangeSize = ({ target: { value } }: RadioChangeEvent) => {
+	// 	setHeight(value);
+	// };
 
-	useEffect(() => {
-		updatePdfFile();
-		console.log("update");
-	}, [height]);
+	// useEffect(() => {
+	// 	updatePdfFile();
+	// 	console.log("update");
+	// }, [height]);
 
 	return (
 		<>
@@ -57,13 +60,13 @@ const Bill: React.FC<IPropsWithBill> = ({ bill }) => {
 				size="large"
 				style={{ width: "100%", marginTop: "30px" }}
 			>
-				<Radio.Group
+				{/* <Radio.Group
 					options={sizeOptions}
 					onChange={onChangeSize}
 					value={height}
 					optionType="button"
 					buttonStyle="solid"
-				/>
+				/> */}
 
 				<Radio.Group
 					options={showPreviewOptions}
