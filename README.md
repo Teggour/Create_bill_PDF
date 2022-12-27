@@ -1,6 +1,6 @@
 # Create bill PDF & PDF-viewer
 
-## **[Link](http://create-bill-pdf.surge.sh/create-bill) to check this app**
+## **[Link](http://create-bill-pdf.surge.sh) to check this app**
 
 Created with surge.sh
 
