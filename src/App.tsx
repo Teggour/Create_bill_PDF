@@ -5,34 +5,50 @@ import {
 	Route,
 	Redirect,
 } from "react-router-dom";
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import HomePage from "./pages/HomePage";
 import CreateBillPage from "./pages/CreateBillPage";
 import PDFViewerPage from "./pages/PDFViewerPage";
 import Page404 from "./pages/Page404";
+import UserProfilePage from "./pages/UserProfilePage";
+import EditUserPage from "./pages/EditUserPage";
+
 import "antd/dist/reset.css";
 
 const App: React.FC = () => {
 	return (
 		<Router>
-			<Switch>
-				<Route exact path="/" component={HomePage} />
+			<Auth0ProviderWithHistory>
+				<Switch>
+					<Route exact path="/" component={HomePage} />
 
-				<Route path="/home">
-					<Redirect to="/" />
-				</Route>
+					<Route path="/home">
+						<Redirect to="/" />
+					</Route>
 
-				<Route path="/homepage">
-					<Redirect to="/" />
-				</Route>
+					<Route path="/homepage">
+						<Redirect to="/" />
+					</Route>
 
-				<Route exact path="/create-bill" component={CreateBillPage} />
+					<Route path="/create-bill" component={CreateBillPage} />
 
-				<Route exact path="/pdf-viewer" component={PDFViewerPage} />
+					<Route path="/pdf-viewer" component={PDFViewerPage} />
 
-				{/* <Route exact path="/to-pdf" component={ToPdf} /> */}
+					<PrivateRoute
+						exact
+						path="/profile"
+						component={UserProfilePage}
+					/>
 
-				<Route path="*" component={Page404} />
-			</Switch>
+					<PrivateRoute
+						path="/profile/edit"
+						component={EditUserPage}
+					/>
+
+					<Route path="*" component={Page404} />
+				</Switch>
+			</Auth0ProviderWithHistory>
 		</Router>
 	);
 };

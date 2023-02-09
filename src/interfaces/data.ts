@@ -38,12 +38,12 @@ export interface IBillData
 	curr_date: string;
 }
 
-export interface IFormStepWithoutPrevProps<T> {
+export interface IFormStepWithoutPrevProps<T>
+	extends Omit<IFormStepProps<T>, "prev"> {}
+
+export interface IFormStepProps<T> {
 	state: T;
 	handleChangeData: (companyInfo: T) => void;
 	next: () => void;
-}
-
-export interface IFormStepProps<T> extends IFormStepWithoutPrevProps<T> {
 	prev: () => void;
 }

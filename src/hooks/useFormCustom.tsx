@@ -30,10 +30,13 @@ function useFormCustom<T>({
 	const handleNextClick = async () => {
 		try {
 			await form.validateFields();
+
 			handleChangeData(formData);
+
 			next();
 		} catch (errorInfo) {
-			console.log("Failed:", errorInfo);
+			console.error("Failed:", errorInfo);
+
 			notification.open({
 				message: "Failed",
 				description: "Please fill in the form correctly",
@@ -44,6 +47,7 @@ function useFormCustom<T>({
 	};
 
 	const handlePrevClick = prev ? () => prev() : undefined;
+
 	return {
 		form,
 		formData,
