@@ -1,9 +1,9 @@
-import React from "react";
+import {FC} from "react";
 import { Typography } from "antd";
 
 import PageTemplate from "../components/PageTemplate/PageTemplate";
 
-const HomePage: React.FC = () => {
+const HomePage: FC = () => {
 	return (
 		<PageTemplate>
 			<Typography.Title>Homepage</Typography.Title>
